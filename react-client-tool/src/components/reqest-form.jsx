@@ -20,13 +20,12 @@ const RequestForm = ({props}) => {
   const onFormSubmit = async(e) => {
     e.preventDefault();
 
-    let res;
     switch (method) {
         case 'GET':
-            res = await axiosInstance.get(serverUrl);
+            await axiosInstance.get(serverUrl);
             break;
         case 'POST':
-            res = await axiosInstance.post(serverUrl, JSON.parse(body));
+            await axiosInstance.post(serverUrl, JSON.parse(body));
             break;
         default:
             return;

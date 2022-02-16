@@ -49,7 +49,7 @@ function App() {
         errors: []
       }
     });
-    setSocket(() => io(url, JSON.parse(config)));
+    setSocket(() => io(url, {...JSON.parse(config), withCredentials: true}));
   }
 
   useEffect(() => {
