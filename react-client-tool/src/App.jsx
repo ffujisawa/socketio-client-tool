@@ -3,6 +3,7 @@ import Connection from './components/connection.jsx';
 import Listen from './components/listen.jsx';
 import Emitter from './components/emitter.jsx';
 import Ack from './components/ack.jsx';
+import RequestForm from './components/reqest-form';
 import { useEffect, useState, useRef } from 'react';
 import { io } from 'socket.io-client';
 import { Container, Row, Col, Modal, Tabs, Tab } from 'react-bootstrap';
@@ -21,7 +22,7 @@ function App() {
   const [connData, setConnData] = useState({
     connected: false,
     loading: false,
-    server: 'http://localhost:8080',
+    server: 'http://localhost:8083',
     config: '{"path": "/socket.io", "forceNew": true, "reconnectionAttempts": 3, "timeout": 2000}',
     errors: []
   });
@@ -228,11 +229,12 @@ function App() {
         <Modal.Header>
           <Modal.Title>
             Configure connection
-            </Modal.Title>
+          </Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
           <Connection eventsToListenFor={eventsToListenFor} emitTo={emitTo} connData={connData} createConnection={createConnection} />
+          <RequestForm></RequestForm>
         </Modal.Body>
       </Modal>
     </div >

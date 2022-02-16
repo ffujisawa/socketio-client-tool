@@ -33,7 +33,7 @@ export default function Connection({ connData, createConnection, eventsToListenF
         {connData.errors.join(', ')} {formValid.join(', ')}
       </Alert>
 
-      <Form onSubmit={onFormSubmit}>
+      <Form className="mb-4" onSubmit={onFormSubmit}>
         <Form.Row className="mb-2">
           <Col>
             <Form.Control required value={serverUrl} placeholder="server url" type="url" onChange={(e) => setServerUrl(e.target.value)} />
@@ -50,9 +50,6 @@ export default function Connection({ connData, createConnection, eventsToListenF
               <strong>Listen to</strong>: {eventsToListenFor.join(', ')} <strong>Emit to</strong>: {emitTo.join(', ')}
             </Form.Text>
             <Button variant="success" type="submit" block disabled={connData.loading}>{connData.loading ? 'Connecting...' : 'Connect'}</Button>
-            <div className="mt-3 text-center text-warning">
-              This uses socket.io version 3 and above. For version 2.x use the previous version of socketio-client-tool <a href="v1/">here</a>.
-            </div>
           </Col>
         </Form.Row>
       </Form>
