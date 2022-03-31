@@ -23,7 +23,7 @@ function App() {
     connected: false,
     loading: false,
     server: 'http://localhost:8083',
-    config: '{"path": "/socket.io", "forceNew": true, "reconnectionAttempts": 3, "timeout": 2000}',
+    config: '{"path": "/socket.io", "forceNew": true, "reconnectionAttempts": 3, "timeout": 2000, "query": {"email": "takuya@example.com"}}',
     errors: []
   });
 
