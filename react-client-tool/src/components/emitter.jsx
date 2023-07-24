@@ -1,13 +1,26 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Form, Col, Button, Alert } from 'react-bootstrap';
 import History from './history.jsx';
 
 export default function Emitter({ emitToChannels, addEmitTo, emitData, emitHistory, clearHistory, stack }) {
-  const [emitChannel, setEmitChannel] = useState('socketio-client');
+  const [emitChannel, setEmitChannel] = useState('join-room');
   const [emitText, setEmitText] = useState('');
-  const [emitDataJson, setEmittDataJson] = useState(false);
+  const [emitDataJson, setEmittDataJson] = useState(true);
   const [newEmitter, setNewEmitter] = useState('');
   const [emitFormErrors, setEmitFormErrors] = useState([]);
+
+  useEffect(() => {
+    const defaultEmitText = {
+      'join-room': '{"roomId":""}',
+      'answer-question': '{"roomId":"", "answer":"", "currentQuizNumber":""}',
+      'leave-room': '{"roomId":""}',
+      'reply-for-manual-check': '{"roomId":""}',
+      'socketio-client': 'hoge',
+      'socketio-client-ack': 'hoge',
+    }
+
+    setEmitText(defaultEmitText[emitChannel]);
+  }, [emitChannel]);
 
   const onEmitDataSubmit = (e) => {
     e.preventDefault();
@@ -67,7 +80,7 @@ export default function Emitter({ emitToChannels, addEmitTo, emitData, emitHisto
             </Form.Control>
           </Col>
           <Col>
-            <Form.Check type="switch" id="is-json" label="JSON data" value={emitDataJson} onChange={(e) => setEmittDataJson(() => e.target.checked)} placeholder="data..." className="pt-3 pl-5" />
+            <Form.Check type="switch" id="is-json" label="JSON data" value={emitDataJson} checked={emitDataJson} onChange={(e) => setEmittDataJson(() => e.target.checked)} placeholder="data..." className="pt-3 pl-5" />
           </Col>
         </Form.Row>
         <Form.Row className="mb-2">

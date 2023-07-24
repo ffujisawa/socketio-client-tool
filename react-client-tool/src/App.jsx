@@ -23,15 +23,15 @@ function App() {
     connected: false,
     loading: false,
     server: 'http://localhost:8083',
-    config: '{"path": "/socket.io", "forceNew": true, "reconnectionAttempts": 3, "timeout": 2000, "query": {"email": "takuya@example.com"}}',
+    config: '{"path": "/socket.io", "forceNew": true, "reconnectionAttempts": 3, "timeout": 2000, "query": {"email": "takuya@example.com"}, "extraHeaders": {"client-id":"ABC123"}}',
     errors: []
   });
 
   const [appConfig, setAppConfig] = useState(0);
-  const [eventsToListenFor, setEventsToListenFor] = useState(['socketio-client', 'message']);
+  const [eventsToListenFor, setEventsToListenFor] = useState(['socketio-client', 'message', 'live-room', 'room-full', 'start-question', 'start-phase', 'progress-end', 'answer', 'question-answered', 'game-status-terminated', 'manual-check']);
 
   const [listenTo, setListenTo] = useState([]);
-  const [emitTo, setEmitTo] = useState(['socketio-client', 'socketio-client-ack']);
+  const [emitTo, setEmitTo] = useState(['join-room', 'answer-question', 'leave-room', 'reply-for-manual-check', 'socketio-client', 'socketio-client-ack']);
 
   // Storage
   const [emitHistory, setEmitHistory] = useState([]);
