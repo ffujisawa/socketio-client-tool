@@ -204,7 +204,7 @@ function App() {
 
         <Row>
           <Col>
-            <Tabs defaultActiveKey="listen" className="mb-4 nav-fillx">
+            <Tabs defaultActiveKey="emit" className="mb-4 nav-fillx">
               <Tab eventKey="listen" title="Listen">
                 <Listen listeners={listenTo} addListener={addListener} listenHistory={listenHistory} clearHistory={clearHistory} stack="listen" />
 
