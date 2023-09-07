@@ -74,7 +74,7 @@ export default function Emitter({ emitToChannels, addEmitTo, emitData, emitHisto
   return (
     <>
       <div>
-        RoomId: <input className="mb-3" onChange={handleChangeRoomId} value={roomId} />
+        RoomId: <input className="mb-3" onChange={handleChangeRoomId} value={roomId} autoFocus />
       </div>
       <div>
         currentPhaseNumber: <input className="mb-3" onChange={handleChangePhaseNumber} value={phaseNumber} />
