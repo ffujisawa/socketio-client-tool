@@ -28,10 +28,10 @@ function App() {
   });
 
   const [appConfig, setAppConfig] = useState(0);
-  const [eventsToListenFor, setEventsToListenFor] = useState(['socketio-client', 'message', 'live-room', 'room-full', 'start-question', 'start-phase', 'progress-end', 'answer', 'question-answered', 'game-status-terminated', 'manual-check']);
+  const [eventsToListenFor, setEventsToListenFor] = useState(['socketio-client', 'message', 'live-room', 'room-full', 'start-question', 'start-phase', 'progress-end', 'answer', 'question-answered', 'game-status-terminated', 'manual-check', 'answerer-selected']);
 
   const [listenTo, setListenTo] = useState([]);
-  const [emitTo, setEmitTo] = useState(['join-room', 'answer-question', 'leave-room', 'reply-for-manual-check', 'socketio-client', 'socketio-client-ack', 'extend-life', 'push-button']);
+  const [emitTo, setEmitTo] = useState(['join-room', 'answer-question', 'leave-room', 'reply-for-plain-room-manual-check', 'socketio-client', 'socketio-client-ack', 'extend-life', 'push-button']);
 
   // Storage
   const [emitHistory, setEmitHistory] = useState([]);

@@ -29,7 +29,7 @@ export default function Emitter({ emitToChannels, addEmitTo, emitData, emitHisto
       'join-room': `{"roomId":"${roomId}"}`,
       'answer-question': `{"roomId":"${roomId}", "answer":"", "currentQuizNumber":"${quizNumber}"}`,
       'leave-room': `{"roomId":"${roomId}"}`,
-      'reply-for-manual-check': `{"roomId":"${roomId}"}`,
+      'reply-for-plain-room-manual-check': `{"roomId":"${roomId}"}`,
       'socketio-client': 'hoge',
       'socketio-client-ack': 'hoge',
       'extend-life': '{}',
