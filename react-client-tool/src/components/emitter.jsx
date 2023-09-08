@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Form, Col, Button, Alert } from 'react-bootstrap';
 import History from './history.jsx';
+import axios from 'axios';
 
 export default function Emitter({ emitToChannels, addEmitTo, emitData, emitHistory, clearHistory, stack }) {
   const [emitChannel, setEmitChannel] = useState('join-room');
@@ -8,9 +9,14 @@ export default function Emitter({ emitToChannels, addEmitTo, emitData, emitHisto
   const [emitDataJson, setEmittDataJson] = useState(true);
   const [newEmitter, setNewEmitter] = useState('');
   const [emitFormErrors, setEmitFormErrors] = useState([]);
+  const [clientId, setClientId] = useState('ABC123');
   const [roomId, setRoomId] = useState('');
   const [phaseNumber, setPhaseNumber] = useState('1');
   const [quizNumber, setQuizNumber] = useState('1');
+
+  const handleChangeClientId = (e) => {
+    setClientId(e.target.value);
+  }
 
   const handleChangeRoomId = (e) => {
     setRoomId(e.target.value);
@@ -22,6 +28,22 @@ export default function Emitter({ emitToChannels, addEmitTo, emitData, emitHisto
 
   const handleChangeQuizNumber = (e) => {
     setQuizNumber(e.target.value);
+  }
+
+  const handleClickEnterPlainRoom = async (e) => {
+    const headers = {
+      'Content-Type': 'application/json',
+    };
+
+    const body = JSON.stringify({
+      clientId: clientId
+    });
+    const response = await axios.post('http://localhost:8083/rooms/enter-plain-room', body, { headers });
+    setRoomId(response.data.plainRoomId);
+  }
+
+  const handleClickEmitButton = (channel, data) => {
+    emitData(channel, JSON.parse(data));
   }
 
   useEffect(() => {
@@ -73,6 +95,12 @@ export default function Emitter({ emitToChannels, addEmitTo, emitData, emitHisto
 
   return (
     <>
+      <div>
+        ClientId: <input className="mb-3 mr-3" onChange={handleChangeClientId} value={clientId} />
+        <button className="btn btn-sm btn-success mr-3" onClick={handleClickEnterPlainRoom}>Enter PlainRoom</button>
+        <button className="btn btn-sm btn-danger mr-3" onClick={() => handleClickEmitButton('join-room', `{"roomId":"${roomId}"}`)}>Join Room</button>
+        <button className="btn btn-sm btn-danger mr-3" onClick={() => handleClickEmitButton('reply-for-plain-room-manual-check', `{"roomId":"${roomId}"}`)}>Manual Check</button>
+      </div>
       <div>
         RoomId: <input className="mb-3" onChange={handleChangeRoomId} value={roomId} autoFocus />
       </div>
